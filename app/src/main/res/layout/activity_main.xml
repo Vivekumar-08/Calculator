@@ -42,13 +42,8 @@
         android:layout_marginHorizontal="30dp"
         android:gravity="end"
         android:text="0"
-<<<<<<< HEAD
         android:textColor="@color/grey"
-        android:textSize="36sp"
-=======
-        android:textColor="@color/black"
         android:textSize="38sp"
->>>>>>> 506382d04e61f7827641780b109c07f6e3f80d06
         android:layout_marginBottom="8dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
