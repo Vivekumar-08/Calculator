@@ -43,9 +43,9 @@
         android:gravity="end"
         android:text="0"
         android:textColor="@color/grey"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
