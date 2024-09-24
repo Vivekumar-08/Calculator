@@ -1,6 +1,11 @@
 package com.example.calculator
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var lastNumeric: Boolean = false
     private var lastDot: Boolean = false
     private var stateError: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             binding.textOperation.append((view as Button).text)
         }
         lastNumeric = true
+        vibratePhone(50)
     }
 
     fun operator(view: View) {
@@ -43,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             binding.textOperation.append((view as Button).text)
             lastDot = false
             lastNumeric = false
+            vibratePhone(50)
         }
     }
 
@@ -52,12 +60,14 @@ class MainActivity : AppCompatActivity() {
         lastNumeric = false
         lastDot = false
         stateError = false
+        vibratePhone(55)
     }
 
     fun backSpace(view: View) {
         if (binding.textOperation.text.isNotEmpty()) {
             binding.textOperation.text = binding.textOperation.text.toString().dropLast(1)
         }
+        vibratePhone(55)
     }
 
     fun dot(view: View) {
@@ -66,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             lastNumeric = false
             lastDot = true
         }
+        vibratePhone(50)
     }
 
     fun equal(view: View) {
@@ -83,6 +94,17 @@ class MainActivity : AppCompatActivity() {
             binding.result.text = "Error"
             stateError = true
             e.printStackTrace()
+        }
+        vibratePhone(55)
+    }
+
+
+    private fun Context.vibratePhone(duration: Long = 100) {
+        val vib = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vib.vibrate(VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            vib.vibrate(duration)
         }
     }
 }
