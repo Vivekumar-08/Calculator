@@ -102,18 +102,12 @@ class MainActivity : AppCompatActivity() {
         vibratePhone(38)
         val expressionText = binding.textOperation.text.toString().replace("÷", "/").replace("×", "*")
         try {
-            val expression = ExpressionBuilder(expressionText).build()
-            val result = expression.evaluate()
-            val longResult = result.toLong()
-            if (result == longResult.toDouble()) {
-                binding.result.text = longResult.toString()
-            } else {
-                binding.result.text = result.toString()
-            }
+            val result = ExpressionBuilder(expressionText).build().evaluate()
+            binding.result.text = if (result == result.toLong().toDouble()) result.toLong().toString() else result.toString()
         } catch (e: Exception) {
-            binding.result.text = binding.textOperation.text
+            binding.result.text = "Error"
             stateError = true
-            e.printStackTrace()
         }
     }
+
 }
