@@ -41,10 +41,15 @@ class MainActivity : AppCompatActivity() {
             binding.textOperation.text = (view as Button).text
             stateError = false
         } else {
-            binding.textOperation.append((view as Button).text)
+            if (binding.textOperation.text.toString() == "0") {
+                binding.textOperation.text = (view as Button).text
+            } else {
+                binding.textOperation.append((view as Button).text)
+            }
         }
         lastNumeric = true
     }
+
 
     fun operator(view: View) {
         vibratePhone(28)
@@ -64,8 +69,8 @@ class MainActivity : AppCompatActivity() {
 
     fun clearAll(view: View) {
         vibratePhone(35)
-        binding.textOperation.text = ""
-        binding.result.text = "0"
+        binding.textOperation.text = "0"
+        binding.result.text = ""
         lastNumeric = false
         lastDot = false
         stateError = false
@@ -75,8 +80,14 @@ class MainActivity : AppCompatActivity() {
         vibratePhone(32)
         if (binding.textOperation.text.isNotEmpty()) {
             binding.textOperation.text = binding.textOperation.text.toString().dropLast(1)
+            binding.result.text = binding.result.text.toString().dropLast(1)
+        }
+        if (binding.textOperation.text.isEmpty()) {
+            binding.textOperation.text = "0"
+            binding.result.text = null
         }
     }
+
 
     fun dot(view: View) {
         vibratePhone(32)
@@ -100,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 binding.result.text = result.toString()
             }
         } catch (e: Exception) {
-            binding.result.text = "Error"
+            binding.result.text = binding.textOperation.text
             stateError = true
             e.printStackTrace()
         }
