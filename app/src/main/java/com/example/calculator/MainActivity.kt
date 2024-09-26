@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             val result = ExpressionBuilder(expressionText).build().evaluate()
             binding.result.text = if (result == result.toLong().toDouble()) result.toLong().toString() else result.toString()
         } catch (e: Exception) {
-            binding.result.text = "Error"
+            binding.result.text =  null
             stateError = true
         }
     }
